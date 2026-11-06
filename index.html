@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090909">
+  <meta name="description" content="Exclusive Modded Heists — a GTA Online community. Join our Discord.">
+  <title>Exclusive Modded Heists | GTA Online</title>
+  <style>
+    :root{--bg:#080808;--panel:#111;--panel2:#171717;--line:#292929;--white:#f4f4f4;--muted:#a6a6a6;--red:#d92828;--red2:#ff4545}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--white);font-family:Inter,Arial,"Microsoft YaHei",sans-serif;line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    .topbar{position:absolute;top:0;left:0;width:100%;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:22px clamp(18px,5vw,72px)}
+    .discord{display:inline-flex;align-items:center;gap:10px;padding:11px 17px;border:1px solid #505050;border-radius:5px;background:#111c;color:#fff;font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;transition:.2s}
+    .discord:hover{background:#5865f2;border-color:#5865f2;transform:translateY(-2px)}
+    .discord svg{width:19px;height:19px;fill:currentColor}
+    .language{display:flex;align-items:center;gap:9px;color:#ddd;font-size:11px;letter-spacing:.12em}
+    .language-label{white-space:nowrap;color:#aaa}
+    .language select{max-width:165px;border:1px solid #555;border-radius:4px;background:#111e;color:#fff;padding:9px 30px 9px 11px;font:700 12px Inter,Arial,"Microsoft YaHei",sans-serif;cursor:pointer;outline:none}
+    .language select:focus{border-color:#e33;box-shadow:0 0 0 2px #e333}
+    .language option{background:#111;color:#fff}
+    .hero{min-height:760px;height:100svh;max-height:1000px;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:100px 20px 70px;background:#080808 url('assets/gta-online-background.jpg') center 54%/cover no-repeat}
+    .hero:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#05050599 0%,#05050538 38%,#080808b8 78%,#080808 100%);pointer-events:none}
+    .hero-inner{position:relative;z-index:1;max-width:850px}
+    .logo{width:clamp(150px,23vw,260px);height:clamp(150px,23vw,260px);object-fit:contain;filter:drop-shadow(0 0 30px #ffffff18);margin:0 auto 24px}
+    .eyebrow{font-size:12px;font-weight:800;letter-spacing:.35em;color:var(--red2);text-transform:uppercase;margin:0 0 12px}
+    h1{font-size:clamp(34px,6.5vw,76px);line-height:1.02;letter-spacing:-.045em;margin:0 auto 18px;text-transform:uppercase;font-weight:950}
+    .mission-statement{max-width:850px;margin:0 auto 18px;color:#fff;font-size:clamp(20px,3.1vw,34px);line-height:1.18;font-weight:900;letter-spacing:-.025em;text-shadow:0 2px 16px #000,0 1px 3px #000;text-wrap:balance}
+    .subtitle{max-width:600px;margin:0 auto;color:#c4c4c4;font-size:clamp(14px,1.8vw,17px)}
+    .hero-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:34px}
+    .btn{display:inline-flex;justify-content:center;align-items:center;min-width:174px;padding:14px 22px;border-radius:4px;font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;transition:.2s}
+    .btn-primary{background:var(--red);color:white;border:1px solid var(--red)}
+    .btn-primary:hover{background:#f13b3b;transform:translateY(-2px)}
+    .btn-ghost{border:1px solid #555;background:#1118;color:#eee}
+    .btn-ghost:hover{border-color:#aaa}
+    .scroll{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:.25em;color:#777}
+    section.content{padding:90px 22px}
+    .wrap{width:min(1050px,100%);margin:auto}
+    .section-kicker{font-size:11px;letter-spacing:.28em;color:var(--red2);font-weight:900;text-transform:uppercase}
+    h2{font-size:clamp(27px,4vw,42px);line-height:1.1;margin:12px 0 18px;text-transform:uppercase;letter-spacing:-.03em}
+    .intro{max-width:660px;color:var(--muted);font-size:15px}
+    .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:38px}
+    .feature{background:linear-gradient(145deg,#171717,#0e0e0e);border:1px solid var(--line);padding:25px;min-height:165px}
+    .feature .num{font-size:11px;color:var(--red2);font-weight:900;letter-spacing:.18em}
+    .feature h3{font-size:16px;margin:14px 0 7px;text-transform:uppercase}
+    .feature p{font-size:13px;color:#999;margin:0}
+
+
+    .services{background:linear-gradient(180deg,#101010,#090909)}
+    .services-intro{max-width:760px}
+    .service-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:34px}
+    .service-card{position:relative;min-height:190px;padding:24px;background:linear-gradient(145deg,#191919,#0d0d0d);border:1px solid #333;border-top:2px solid #c92727;border-radius:4px}
+    .service-number{font-size:11px;font-weight:900;letter-spacing:.2em;color:#f04444}
+    .service-card h3{font-size:16px;line-height:1.3;margin:20px 0 10px;text-transform:uppercase}
+    .service-card p{font-size:13px;color:#aaa;margin:0}
+    .services-cta{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:30px;padding:22px 24px;border:1px solid #352020;background:#160d0d}
+    .services-cta p{margin:0;font-size:clamp(17px,2.4vw,23px);font-weight:900}
+    .videos{background:#0b0b0b}
+    .video-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:32px}
+    .video-frame{position:relative;aspect-ratio:16/9;overflow:hidden;border:1px solid #353535;border-radius:6px;background:#000;box-shadow:0 14px 38px #0008}
+    .video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    .join{background:linear-gradient(120deg,#1a1010,#111 55%,#190d0d);border-top:1px solid #2b1a1a;border-bottom:1px solid #2b1a1a;text-align:center}
+    .join .intro{margin:0 auto}
+    .join .btn{margin-top:28px}
+    .announcement{background:linear-gradient(180deg,#101010,#090909);border-top:1px solid #292929}
+    .team-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:26px}
+    .team-member{padding:15px 18px;background:#151515;border:1px solid #303030;border-left:2px solid var(--red);font-size:14px;color:#ddd}
+    .team-member strong{color:#fff;display:block;font-size:14px}
+    .team-member code{display:block;margin-top:4px;color:#aaa;font:12px ui-monospace,SFMono-Regular,Consolas,monospace}
+    .rules-panel{margin-top:34px;padding:24px;background:#151515;border:1px solid #303030;border-left:2px solid var(--red)}
+    .rules-panel h3{margin:0 0 14px;font-size:18px;text-transform:uppercase}
+    .rules-list{margin:0;padding-left:24px;color:#d0d0d0}
+    .rules-list li{padding:0 0 10px 5px}
+    .fundraiser-note{margin:22px 0 0;padding:18px 20px;background:#211010;border:1px solid #542323;color:#f1dede;font-weight:650}
+    footer{padding:38px 22px 30px;background:#050505;text-align:center}
+    .footer-logo{width:48px;height:48px;object-fit:contain;opacity:.85;margin-bottom:10px}
+    .contact-label{font-size:10px;color:#777;letter-spacing:.22em;text-transform:uppercase;margin:8px 0}
+    .email{font-size:clamp(15px,2vw,18px);font-weight:700;letter-spacing:.02em}
+    .email:hover{color:var(--red2)}
+
+    .youtube-support{max-width:760px;margin:26px auto 0;padding:22px 20px;background:linear-gradient(145deg,#191010,#0d0d0d);border:1px solid #542323;border-radius:5px}
+    .youtube-support h3{margin:0 0 7px;font-size:16px;text-transform:uppercase;letter-spacing:.04em}
+    .youtube-support p{margin:0 auto 16px;color:#aaa;font-size:13px}
+    .youtube-link{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:12px 20px;background:#d92828;border:1px solid #d92828;border-radius:4px;color:#fff;font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;transition:.2s}
+    .youtube-link:hover{background:#f13b3b;transform:translateY(-2px)}
+    .youtube-home{display:block;margin:14px auto 0;color:#bbb;font-size:13px;text-decoration:underline;text-underline-offset:4px}
+    .youtube-home:hover{color:#fff}
+    .signature{margin-top:18px;color:#aaa;font-size:13px}
+    .signature strong{color:#eee}
+    .copyright{margin-top:22px;color:#555;font-size:10px;letter-spacing:.08em}
+    @media(max-width:700px){.team-list{grid-template-columns:1fr}.service-grid{grid-template-columns:1fr}.service-card{min-height:0}.services-cta{align-items:flex-start}.video-grid{grid-template-columns:1fr}.topbar{padding:15px}.discord{padding:9px 11px;font-size:10px}.feature-grid{grid-template-columns:1fr}.hero{min-height:690px}.feature{min-height:0}.content{padding:70px 20px!important}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="discord" href="https://discord.gg/dSxBJ9td96" target="_blank" rel="noopener noreferrer" aria-label="Join our Discord">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.7 5.3A18.7 18.7 0 0 0 15.1 4l-.6 1.2a17.2 17.2 0 0 0-5 0L8.9 4a18.7 18.7 0 0 0-4.6 1.3C1.4 9.6.6 13.8 1 18c1.9 1.4 3.8 2.2 5.7 2.7l1.2-2a12 12 0 0 1-1.9-.9l.5-.4c3.7 1.7 7.7 1.7 11.3 0l.5.4a12 12 0 0 1-1.9.9l1.2 2c1.9-.5 3.8-1.3 5.7-2.7.5-4.9-.8-9.1-3.6-12.7ZM8.7 15.2c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Zm6.6 0c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Z"/></svg>
+      <span data-i18n="discord">JOIN DISCORD</span>
+    </a>
+    <nav class="language" aria-label="Language selector">
+      <label class="language-label" for="language-select" data-i18n="language">LANGUAGE</label>
+      <select id="language-select" aria-label="Choose language">
+        <option value="en">English</option>
+        <option value="zh">中文</option>
+        <option value="ru">Русский</option>
+        <option value="es">Español</option>
+        <option value="hi">हिन्दी</option>
+        <option value="el">Ελληνικά</option>
+        <option value="pt">Português</option>
+      </select>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <img class="logo" src="assets/skull-logo.png" alt="Exclusive Modded Heists skull emblem">
+        <p class="eyebrow" data-i18n="eyebrow">GTA ONLINE COMMUNITY</p>
+        <h1>Exclusive<br>Modded Heists</h1>
+        <p class="mission-statement" data-i18n="mission">Non-profit organization provides free assistance to GTA 5 players.</p>
+        <p class="subtitle" data-i18n="subtitle">A community built for players who want to team up, connect, and take on GTA Online together.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://discord.gg/dSxBJ9td96" target="_blank" rel="noopener noreferrer" data-i18n="join">JOIN OUR DISCORD</a>
+          <a class="btn btn-ghost" href="#about" data-i18n="discover">DISCOVER MORE</a>
+        </div>
+      </div>
+      <div class="scroll" data-i18n="scroll">SCROLL TO EXPLORE ↓</div>
+    </section>
+
+    <section class="content" id="about">
+      <div class="wrap">
+        <div class="section-kicker" data-i18n="aboutKicker">WELCOME TO THE CREW</div>
+        <h2 data-i18n="aboutTitle">Make every heist count.</h2>
+        <p class="intro" data-i18n="aboutText">Welcome to Exclusive Modded Heists, a GTA Online community where players can meet, organize sessions, and enjoy the game together. Join our Discord to connect with the community and get involved.</p>
+        <div class="feature-grid">
+          <article class="feature"><div class="num">01 / COMMUNITY</div><h3 data-i18n="f1Title">Find your crew</h3><p data-i18n="f1Text">Meet other players and build your crew.</p></article>
+          <article class="feature"><div class="num">02 / TEAMWORK</div><h3 data-i18n="f2Title">Play together</h3><p data-i18n="f2Text">Connect with players and plan your next session.</p></article>
+          <article class="feature"><div class="num">03 / ADVENTURE</div><h3 data-i18n="f3Title">Own the night</h3><p data-i18n="f3Text">Share the experience and make every run memorable.</p></article>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section class="content services" id="services">
+      <div class="wrap">
+        <div class="section-kicker" data-i18n="servicesKicker">EXCLUSIVE HEIST EXPERIENCES</div>
+        <h2 data-i18n="servicesTitle">Take on heists your way.</h2>
+        <p class="intro services-intro" data-i18n="servicesIntro">From Cayo Perico to the Pacific Standard Job, discover special in-game experiences with our community.</p>
+        <div class="service-grid">
+          <article class="service-card"><span class="service-number">01</span><h3 data-i18n="service1Title">Cayo Perico Heist</h3><p data-i18n="service1Text">Take on the Cayo Perico heist with a tank.</p></article>
+          <article class="service-card"><span class="service-number">02</span><h3 data-i18n="service2Title">Doomsday Heist</h3><p data-i18n="service2Text">Complete the Doomsday Heist in one second and earn GTA$2.5 million.</p></article>
+          <article class="service-card"><span class="service-number">03</span><h3 data-i18n="service3Title">Diamond Casino Heist</h3><p data-i18n="service3Text">Use a minigun to take on the casino security guards.</p></article>
+          <article class="service-card"><span class="service-number">04</span><h3 data-i18n="service4Title">Apartment Heists</h3><p data-i18n="service4Text">Complete an apartment heist in one second and earn GTA$3 million.</p></article>
+          <article class="service-card"><span class="service-number">05</span><h3 data-i18n="service5Title">Pacific Standard Job</h3><p data-i18n="service5Text">Ride the Oppressor Mk II all the way to the dinghy.</p></article>
+        </div>
+        <div class="services-cta"><p data-i18n="servicesCta">What are you waiting for? Join us today!</p><a class="btn btn-primary" href="https://discord.gg/dSxBJ9td96" target="_blank" rel="noopener noreferrer" data-i18n="join">JOIN OUR DISCORD</a></div>
+      </div>
+    </section>
+
+    <section class="content videos" id="videos">
+      <div class="wrap">
+        <div class="section-kicker" data-i18n="videosKicker">WATCH THE ACTION</div>
+        <h2 data-i18n="videosTitle">Featured Videos</h2>
+        <p class="intro" data-i18n="videosText">Check out these GTA Online videos from the community.</p>
+        <div class="video-grid">
+          <div class="video-frame">
+            <iframe src="https://www.youtube-nocookie.com/embed/UfGdW2lL0q0" title="GTA Online video 1" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <div class="video-frame">
+            <iframe src="https://www.youtube-nocookie.com/embed/YcmCSNQIYfw" title="GTA Online video 2" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content join" id="join">
+      <div class="wrap">
+        <div class="section-kicker" data-i18n="joinKicker">YOUR NEXT CREW STARTS HERE</div>
+        <h2 data-i18n="joinTitle">Ready to join us?</h2>
+        <p class="intro" data-i18n="joinText">Come say hello in our Discord server. We look forward to seeing you in Los Santos.</p>
+        <a class="btn btn-primary" href="https://discord.gg/dSxBJ9td96" target="_blank" rel="noopener noreferrer" data-i18n="join">JOIN OUR DISCORD</a>
+      </div>
+    </section>
+  </main>
+
+    <section class="content announcement" id="announcement">
+      <div class="wrap">
+        <div class="section-kicker" data-i18n="announcementKicker">COMMUNITY ANNOUNCEMENT</div>
+        <h2 data-i18n="teamTitle">Our Modding Team (Game Hosts)</h2>
+        <div class="team-list">
+          <div class="team-member"><strong>@JackZhangFuXi</strong><code>Zfxxyj1108</code></div>
+          <div class="team-member"><strong>@UTSHO</strong><code>_utshoo</code></div>
+          <div class="team-member"><strong>@Predator</strong><code>C4zryvon</code></div>
+          <div class="team-member"><strong>@LuffyKiNg69</strong><code>LuffyKiNg69</code></div>
+          <div class="team-member"><strong>@Gnoxius</strong><code>Gabadool8</code></div>
+        </div>
+        <div class="rules-panel">
+          <h3 id="rules-title">Heist Mission Requirements</h3>
+          <ol class="rules-list" id="heist-rules"></ol>
+          <p class="fundraiser-note" id="fundraiser-note"></p>
+        </div>
+      </div>
+    </section>
+
+  <footer>
+    <img class="footer-logo" src="assets/skull-logo.png" alt="">
+    <div class="contact-label" data-i18n="contact">CONTACT EMAIL</div>
+    <a class="email" href="mailto:zfx110831841226@163.com">zfx110831841226@163.com</a>
+    <div class="youtube-support">
+      <h3 data-i18n="youtubeTitle">Want to support me?</h3>
+      <p data-i18n="youtubeText">If you'd like to help me, please subscribe to my YouTube channel and give my videos a like. Thank you!</p>
+      <a class="youtube-link" href="https://www.youtube.com/@zfxxyj1108-jack" target="_blank" rel="noopener noreferrer" data-i18n="youtubeSubscribe">SUBSCRIBE &amp; LIKE</a>
+      <a class="youtube-home" href="https://www.youtube.com/@zfxxyj1108-jack" target="_blank" rel="noopener noreferrer" data-i18n="youtubeHomepage">MY YOUTUBE HOMEPAGE</a>
+    </div>
+    <div class="signature"><span data-i18n="createdBy">Created by</span> <strong>jack zhang</strong> <span class="sep">|</span> <strong>小福</strong></div>
+    <div class="copyright">EXCLUSIVE MODDED HEISTS · GTA ONLINE COMMUNITY</div>
+  </footer>
+
+  <script>
+    const translations = {
+      en: {
+        language:"LANGUAGE", discord:"JOIN DISCORD", eyebrow:"GTA ONLINE COMMUNITY",
+        mission:"Non-profit organization provides free assistance to GTA 5 players.",
+        servicesKicker:"EXCLUSIVE HEIST EXPERIENCES", servicesTitle:"Take on heists your way.",
+        servicesIntro:"From Cayo Perico to the Pacific Standard Job, discover special in-game experiences with our community.",
+        service1Title:"Cayo Perico Heist", service1Text:"Take on the Cayo Perico heist with a tank.",
+        service2Title:"Doomsday Heist", service2Text:"Complete the Doomsday Heist in one second and earn GTA$2.5 million.",
+        service3Title:"Diamond Casino Heist", service3Text:"Use a minigun to take on the casino security guards.",
+        service4Title:"Apartment Heists", service4Text:"Complete an apartment heist in one second and earn GTA$3 million.",
+        service5Title:"Pacific Standard Job", service5Text:"Ride the Oppressor Mk II all the way to the dinghy.",
+        servicesCta:"What are you waiting for? Join us today!",
+        subtitle:"A community built for players who want to team up, connect, and take on GTA Online together.",
+        join:"JOIN OUR DISCORD", discover:"DISCOVER MORE", scroll:"SCROLL TO EXPLORE ↓",
+        aboutKicker:"WELCOME TO THE CREW", aboutTitle:"Make every heist count.",
+        aboutText:"Welcome to Exclusive Modded Heists, a GTA Online community where players can meet, organize sessions, and enjoy the game together. Join our Discord to connect with the community and get involved.",
+        f1Title:"Find your crew", f1Text:"Meet other players and build your crew.",
+        f2Title:"Play together", f2Text:"Connect with players and plan your next session.",
+        f3Title:"Own the night", f3Text:"Share the experience and make every run memorable.",
+        videosKicker:"WATCH THE ACTION", videosTitle:"Featured Videos",
+        videosText:"Check out these GTA Online videos from the community.",
+        joinKicker:"YOUR NEXT CREW STARTS HERE", joinTitle:"Ready to join us?",
+        joinText:"Come say hello in our Discord server. We look forward to seeing you in Los Santos.",
+        contact:"CONTACT EMAIL", createdBy:"Created by",
+        youtubeTitle:"Want to support me?", youtubeText:"If you'd like to help me, please subscribe to my YouTube channel and give my videos a like. Thank you!", youtubeSubscribe:"SUBSCRIBE & LIKE", youtubeHomepage:"MY YOUTUBE HOMEPAGE" 
+      },
+      zh: {
+        language:"选择语言", discord:"加入 Discord 群聊", eyebrow:"GTA ONLINE 玩家社区",
+        mission:"非营利组织，为 GTA 5 玩家提供免费帮助。",
+        servicesKicker:"专属抢劫体验", servicesTitle:"用不一样的方式完成抢劫。",
+        servicesIntro:"从佩里科岛到太平洋标准差事，来探索我们社区可以带你体验的特别游戏玩法。",
+        service1Title:"佩里科岛抢劫", service1Text:"让你在佩里科岛抢劫任务中使用坦克。",
+        service2Title:"末日抢劫", service2Text:"末日抢劫任务一秒完成，并获得 250 万游戏币。",
+        service3Title:"赌场抢劫", service3Text:"在赌场抢劫任务中，使用加特林机枪对抗保安。",
+        service4Title:"公寓抢劫", service4Text:"公寓抢劫任务一秒完成，获得 300 万游戏币。",
+        service5Title:"太平洋标准差事", service5Text:"在太平洋抢劫任务中，驾驶暴君 MK II 前往皮划艇。",
+        servicesCta:"你还在等什么？现在就加入我们！",
+        subtitle:"为热爱 GTA Online 的玩家打造的社区。与伙伴集结、交流，一起体验洛圣都的精彩世界。",
+        join:"加入我们的 Discord", discover:"了解更多", scroll:"向下滚动，探索更多 ↓",
+        aboutKicker:"欢迎加入我们的团队", aboutTitle:"让每一次行动都值得。",
+        aboutText:"欢迎来到 Exclusive Modded Heists，这是一个 GTA Online 玩家社区。在这里，你可以认识其他玩家、组织游戏活动并一起享受游戏。加入我们的 Discord，与社区成员交流并参与其中。",
+        f1Title:"寻找你的队友", f1Text:"认识更多玩家，组建属于你的团队。",
+        f2Title:"并肩行动", f2Text:"与其他玩家交流，计划下一次游戏活动。",
+        f3Title:"畅玩洛圣都", f3Text:"分享游戏乐趣，让每一次行动都令人难忘。",
+        videosKicker:"精彩视频", videosTitle:"精选视频", videosText:"观看 GTA Online 社区带来的精彩视频。",
+        joinKicker:"你的下一支队伍，从这里开始", joinTitle:"准备好加入我们了吗？",
+        joinText:"欢迎来到我们的 Discord 群聊打个招呼。期待在洛圣都见到你！",
+        contact:"联系邮箱", createdBy:"制作：",
+        youtubeTitle:"想支持我吗？", youtubeText:"如果你想帮助我，请订阅我的 YouTube 频道，并为我的视频点赞。谢谢！", youtubeSubscribe:"订阅并点赞", youtubeHomepage:"我的 YouTube 主页" 
+      },
+      ru: {
+        language:"ЯЗЫК", discord:"ПРИСОЕДИНИТЬСЯ К DISCORD", eyebrow:"СООБЩЕСТВО GTA ONLINE",
+        mission:"Некоммерческая организация бесплатно помогает игрокам GTA 5.",
+        servicesKicker:"ОСОБЫЕ ОГРАБЛЕНИЯ", servicesTitle:"Проходите ограбления по-своему.",
+        servicesIntro:"От Кайо-Перико до Pacific Standard — откройте необычные игровые возможности вместе с нашим сообществом.",
+        service1Title:"Ограбление Кайо-Перико", service1Text:"Пройдите ограбление Кайо-Перико на танке.",
+        service2Title:"Судный день", service2Text:"Завершите ограбление «Судный день» за одну секунду и получите 2,5 млн GTA$.",
+        service3Title:"Ограбление казино", service3Text:"Используйте миниган против охраны казино.",
+        service4Title:"Ограбления квартир", service4Text:"Завершите ограбление квартиры за одну секунду и получите 3 млн GTA$.",
+        service5Title:"Pacific Standard", service5Text:"Доберитесь до надувной лодки на Oppressor Mk II.",
+        servicesCta:"Чего вы ждёте? Присоединяйтесь прямо сейчас!",
+        subtitle:"Сообщество для игроков, которые хотят объединяться, общаться и вместе играть в GTA Online.",
+        join:"НАШ DISCORD", discover:"УЗНАТЬ БОЛЬШЕ", scroll:"ПРОКРУТИТЕ ВНИЗ ↓",
+        aboutKicker:"ДОБРО ПОЖАЛОВАТЬ В КОМАНДУ", aboutTitle:"Пусть каждое ограбление будет незабываемым.",
+        aboutText:"Добро пожаловать в Exclusive Modded Heists — сообщество GTA Online, где игроки могут знакомиться, организовывать игровые сессии и вместе наслаждаться игрой. Присоединяйтесь к нашему Discord!",
+        f1Title:"Найдите свою команду", f1Text:"Знакомьтесь с игроками и собирайте свою команду.",
+        f2Title:"Играйте вместе", f2Text:"Общайтесь с игроками и планируйте следующие сессии.",
+        f3Title:"Покорите ночь", f3Text:"Делитесь впечатлениями и делайте каждую игру особенной.",
+        videosKicker:"СМОТРИТЕ В ДЕЙСТВИИ", videosTitle:"Избранные видео",
+        videosText:"Посмотрите эти видео GTA Online от нашего сообщества.",
+        joinKicker:"ВАША СЛЕДУЮЩАЯ КОМАНДА НАЧИНАЕТСЯ ЗДЕСЬ", joinTitle:"Готовы присоединиться?",
+        joinText:"Заходите в наш Discord и поздоровайтесь. Увидимся в Лос-Сантосе!",
+        contact:"ЭЛЕКТРОННАЯ ПОЧТА", createdBy:"Создатель:"
+      },
+      es: {
+        language:"IDIOMA", discord:"UNIRSE A DISCORD", eyebrow:"COMUNIDAD DE GTA ONLINE",
+        mission:"Organización sin ánimo de lucro que ofrece ayuda gratuita a los jugadores de GTA 5.",
+        servicesKicker:"ATRACOS EXCLUSIVOS", servicesTitle:"Vive los golpes a tu manera.",
+        servicesIntro:"Desde Cayo Perico hasta Pacific Standard, descubre experiencias especiales dentro del juego con nuestra comunidad.",
+        service1Title:"Golpe a Cayo Perico", service1Text:"Completa el golpe de Cayo Perico utilizando un tanque.",
+        service2Title:"Golpe del Juicio Final", service2Text:"Completa el golpe del Juicio Final en un segundo y consigue 2,5 millones de GTA$.",
+        service3Title:"Golpe al casino", service3Text:"Enfréntate a los guardias del casino usando una minigun.",
+        service4Title:"Golpes a apartamentos", service4Text:"Completa un golpe de apartamento en un segundo y consigue 3 millones de GTA$.",
+        service5Title:"Pacific Standard", service5Text:"Llega hasta la lancha neumática conduciendo el Oppressor Mk II.",
+        servicesCta:"¿A qué esperas? ¡Únete ahora!",
+        subtitle:"Una comunidad para jugadores que quieren formar equipo, conectar y disfrutar juntos de GTA Online.",
+        join:"ÚNETE A DISCORD", discover:"DESCUBRIR MÁS", scroll:"DESPLÁZATE PARA EXPLORAR ↓",
+        aboutKicker:"TE DAMOS LA BIENVENIDA", aboutTitle:"Haz que cada golpe cuente.",
+        aboutText:"Te damos la bienvenida a Exclusive Modded Heists, una comunidad de GTA Online donde los jugadores pueden conocerse, organizar partidas y disfrutar del juego juntos. Únete a nuestro Discord para conectar con la comunidad.",
+        f1Title:"Encuentra tu equipo", f1Text:"Conoce a otros jugadores y forma tu equipo.",
+        f2Title:"Jugad juntos", f2Text:"Conecta con otros jugadores y planea tu próxima sesión.",
+        f3Title:"Conquista la noche", f3Text:"Comparte la experiencia y haz que cada partida sea memorable.",
+        videosKicker:"MIRA LA ACCIÓN", videosTitle:"Vídeos destacados",
+        videosText:"Descubre estos vídeos de GTA Online de nuestra comunidad.",
+        joinKicker:"TU PRÓXIMO EQUIPO EMPIEZA AQUÍ", joinTitle:"¿Listo para unirte?",
+        joinText:"Pásate por nuestro servidor de Discord y saluda. ¡Nos vemos en Los Santos!",
+        contact:"CORREO DE CONTACTO", createdBy:"Creado por"
+      },
+      hi: {
+        language:"भाषा", discord:"DISCORD से जुड़ें", eyebrow:"GTA ONLINE समुदाय",
+        mission:"गैर-लाभकारी संगठन, जो GTA 5 खिलाड़ियों को मुफ़्त सहायता प्रदान करता है।",
+        servicesKicker:"खास हीस्ट अनुभव", servicesTitle:"हीस्ट अपने अंदाज़ में पूरा करें।",
+        servicesIntro:"कायो पेरिको से पैसिफिक स्टैंडर्ड तक, हमारे समुदाय के साथ गेम के खास अनुभवों को जानें।",
+        service1Title:"कायो पेरिको हीस्ट", service1Text:"टैंक का इस्तेमाल करके कायो पेरिको हीस्ट पूरा करें।",
+        service2Title:"डूम्सडे हीस्ट", service2Text:"डूम्सडे हीस्ट एक सेकंड में पूरा करें और GTA$2.5 मिलियन पाएं।",
+        service3Title:"कैसीनो हीस्ट", service3Text:"कैसीनो के सुरक्षा गार्डों का सामना मिनिगन से करें।",
+        service4Title:"अपार्टमेंट हीस्ट", service4Text:"अपार्टमेंट हीस्ट एक सेकंड में पूरा करें और GTA$3 मिलियन पाएं।",
+        service5Title:"पैसिफिक स्टैंडर्ड", service5Text:"Oppressor Mk II से डिंगी नाव तक पहुँचें।",
+        servicesCta:"इंतज़ार किस बात का? आज ही जुड़ें!",
+        subtitle:"उन खिलाड़ियों का समुदाय जो साथ मिलकर टीम बनाना, जुड़ना और GTA Online खेलना चाहते हैं।",
+        join:"हमारे DISCORD से जुड़ें", discover:"और जानें", scroll:"और देखने के लिए नीचे स्क्रॉल करें ↓",
+        aboutKicker:"हमारे समुदाय में आपका स्वागत है", aboutTitle:"हर हीस्ट को यादगार बनाएं।",
+        aboutText:"Exclusive Modded Heists में आपका स्वागत है — GTA Online का एक समुदाय जहाँ खिलाड़ी मिल सकते हैं, गेमिंग सेशन आयोजित कर सकते हैं और साथ में खेल का आनंद ले सकते हैं। समुदाय से जुड़ने के लिए हमारे Discord में शामिल हों।",
+        f1Title:"अपनी टीम खोजें", f1Text:"अन्य खिलाड़ियों से मिलें और अपनी टीम बनाएं।",
+        f2Title:"मिलकर खेलें", f2Text:"खिलाड़ियों से जुड़ें और अपने अगले सेशन की योजना बनाएं।",
+        f3Title:"रात पर राज करें", f3Text:"अनुभव साझा करें और हर गेम को यादगार बनाएं।",
+        videosKicker:"एक्शन देखें", videosTitle:"चुनिंदा वीडियो",
+        videosText:"हमारे समुदाय के ये GTA Online वीडियो देखें।",
+        joinKicker:"आपकी अगली टीम यहीं से शुरू होती है", joinTitle:"क्या आप जुड़ने के लिए तैयार हैं?",
+        joinText:"हमारे Discord सर्वर पर आएँ और नमस्ते कहें। लॉस सैंटोस में मिलते हैं!",
+        contact:"संपर्क ईमेल", createdBy:"निर्माता:"
+      },
+      el: {
+        language:"ΓΛΩΣΣΑ", discord:"ΓΙΝΕΤΕ ΜΕΛΟΣ ΣΤΟ DISCORD", eyebrow:"ΚΟΙΝΟΤΗΤΑ GTA ONLINE",
+        mission:"Μη κερδοσκοπικός οργανισμός που προσφέρει δωρεάν βοήθεια σε παίκτες του GTA 5.",
+        servicesKicker:"ΞΕΧΩΡΙΣΤΕΣ ΛΗΣΤΕΙΕΣ", servicesTitle:"Ζήστε τις ληστείες με τον δικό σας τρόπο.",
+        servicesIntro:"Από το Cayo Perico έως το Pacific Standard, ανακαλύψτε ξεχωριστές εμπειρίες μέσα στο παιχνίδι μαζί με την κοινότητά μας.",
+        service1Title:"Ληστεία Cayo Perico", service1Text:"Ολοκληρώστε τη ληστεία Cayo Perico χρησιμοποιώντας άρμα μάχης.",
+        service2Title:"Ληστεία Doomsday", service2Text:"Ολοκληρώστε τη ληστεία Doomsday σε ένα δευτερόλεπτο και κερδίστε 2,5 εκατομμύρια GTA$.",
+        service3Title:"Ληστεία καζίνο", service3Text:"Αντιμετωπίστε τους φρουρούς του καζίνο χρησιμοποιώντας μίνιγκαν.",
+        service4Title:"Ληστείες διαμερισμάτων", service4Text:"Ολοκληρώστε μια ληστεία διαμερίσματος σε ένα δευτερόλεπτο και κερδίστε 3 εκατομμύρια GTA$.",
+        service5Title:"Pacific Standard", service5Text:"Οδηγήστε το Oppressor Mk II μέχρι το φουσκωτό σκάφος.",
+        servicesCta:"Τι περιμένετε; Ελάτε μαζί μας σήμερα!",
+        subtitle:"Μια κοινότητα για παίκτες που θέλουν να συνεργαστούν, να γνωριστούν και να παίξουν μαζί το GTA Online.",
+        join:"ΜΠΕΙΤΕ ΣΤΟ DISCORD", discover:"ΑΝΑΚΑΛΥΨΤΕ ΠΕΡΙΣΣΟΤΕΡΑ", scroll:"ΚΑΝΤΕ ΚΥΛΙΣΗ ΓΙΑ ΕΞΕΡΕΥΝΗΣΗ ↓",
+        aboutKicker:"ΚΑΛΩΣ ΗΡΘΑΤΕ ΣΤΗΝ ΟΜΑΔΑ", aboutTitle:"Κάντε κάθε ληστεία να μετράει.",
+        aboutText:"Καλώς ήρθατε στο Exclusive Modded Heists, μια κοινότητα GTA Online όπου οι παίκτες μπορούν να γνωριστούν, να οργανώσουν συνεδρίες παιχνιδιού και να διασκεδάσουν μαζί. Ελάτε στο Discord μας!",
+        f1Title:"Βρείτε την ομάδα σας", f1Text:"Γνωρίστε άλλους παίκτες και δημιουργήστε την ομάδα σας.",
+        f2Title:"Παίξτε μαζί", f2Text:"Επικοινωνήστε με παίκτες και σχεδιάστε την επόμενη συνεδρία σας.",
+        f3Title:"Κατακτήστε τη νύχτα", f3Text:"Μοιραστείτε την εμπειρία και κάντε κάθε παιχνίδι αξέχαστο.",
+        videosKicker:"ΔΕΙΤΕ ΤΗ ΔΡΑΣΗ", videosTitle:"Επιλεγμένα βίντεο",
+        videosText:"Δείτε αυτά τα βίντεο GTA Online από την κοινότητά μας.",
+        joinKicker:"Η ΕΠΟΜΕΝΗ ΟΜΑΔΑ ΣΑΣ ΞΕΚΙΝΑ ΕΔΩ", joinTitle:"Είστε έτοιμοι να συμμετάσχετε;",
+        joinText:"Περάστε από τον διακομιστή Discord και πείτε ένα γεια. Τα λέμε στο Los Santos!",
+        contact:"EMAIL ΕΠΙΚΟΙΝΩΝΙΑΣ", createdBy:"Δημιουργός:"
+      },
+      pt: {
+        language:"IDIOMA", discord:"ENTRAR NO DISCORD", eyebrow:"COMUNIDADE GTA ONLINE",
+        mission:"Organização sem fins lucrativos que oferece assistência gratuita aos jogadores de GTA 5.",
+        servicesKicker:"ASSALTOS EXCLUSIVOS", servicesTitle:"Faça os assaltos do seu jeito.",
+        servicesIntro:"De Cayo Perico ao Pacific Standard, descubra experiências especiais dentro do jogo com a nossa comunidade.",
+        service1Title:"Golpe de Cayo Perico", service1Text:"Faça o golpe de Cayo Perico usando um tanque.",
+        service2Title:"Golpe do Juízo Final", service2Text:"Conclua o Golpe do Juízo Final em um segundo e ganhe GTA$ 2,5 milhões.",
+        service3Title:"Golpe do Cassino", service3Text:"Enfrente os seguranças do cassino usando uma minigun.",
+        service4Title:"Golpes de Apartamento", service4Text:"Conclua um golpe de apartamento em um segundo e ganhe GTA$ 3 milhões.",
+        service5Title:"Pacific Standard", service5Text:"Vá até o bote usando o Oppressor Mk II.",
+        servicesCta:"Está esperando o quê? Junte-se a nós agora!",
+        subtitle:"Uma comunidade para jogadores que querem formar equipes, interagir e jogar GTA Online juntos.",
+        join:"ENTRE NO NOSSO DISCORD", discover:"SAIBA MAIS", scroll:"ROLE PARA EXPLORAR ↓",
+        aboutKicker:"BEM-VINDO À EQUIPE", aboutTitle:"Faça cada assalto valer a pena.",
+        aboutText:"Bem-vindo ao Exclusive Modded Heists, uma comunidade de GTA Online onde os jogadores podem se conhecer, organizar sessões e aproveitar o jogo juntos. Entre no nosso Discord para participar da comunidade.",
+        f1Title:"Encontre sua equipe", f1Text:"Conheça outros jogadores e forme sua equipe.",
+        f2Title:"Jogue junto", f2Text:"Conecte-se com jogadores e planeje sua próxima sessão.",
+        f3Title:"Domine a noite", f3Text:"Compartilhe a experiência e torne cada partida memorável.",
+        videosKicker:"VEJA A AÇÃO", videosTitle:"Vídeos em destaque",
+        videosText:"Confira estes vídeos de GTA Online da comunidade.",
+        joinKicker:"SUA PRÓXIMA EQUIPE COMEÇA AQUI", joinTitle:"Pronto para participar?",
+        joinText:"Venha dar um oi no nosso servidor do Discord. Esperamos você em Los Santos!",
+        contact:"E-MAIL DE CONTATO", createdBy:"Criado por"
+      }
+    };
+
+    const announcementTranslations = {
+      en: ["COMMUNITY ANNOUNCEMENT", "Our Modding Team (Game Hosts)"],
+      zh: ["社区公告", "我们的改装团队（游戏主持人）"],
+      ru: ["ОБЪЯВЛЕНИЕ СООБЩЕСТВА", "Наша команда моддеров (ведущие игровых сессий)"],
+      es: ["ANUNCIO DE LA COMUNIDAD", "Nuestro equipo de modding (anfitriones)"],
+      hi: ["समुदाय की घोषणा", "हमारी मॉडिंग टीम (गेम होस्ट)"],
+      el: ["ΑΝΑΚΟΙΝΩΣΗ ΚΟΙΝΟΤΗΤΑΣ", "Η ομάδα modding μας (διοργανωτές παιχνιδιών)"],
+      pt: ["ANÚNCIO DA COMUNIDADE", "Nossa equipe de modding (anfitriões)" ]
+    };
+    for (const [lang, labels] of Object.entries(announcementTranslations)) {
+      translations[lang].announcementKicker = labels[0];
+      translations[lang].teamTitle = labels[1];
+    }
+
+
+    const announcementRules = {
+      en: {
+        title:"Heist Mission Requirements",
+        items:[
+          "During the Cayo Perico Heist, do not collect any secondary loot, including gold, cocaine, weed, paintings, or cash.",
+          "During the Diamond Casino Heist, do not hack the fingerprint scanner.",
+          "Do not leave in the middle of a mission.",
+          "Please do not keep the host waiting for too long.",
+          "If you parachute in from an aircraft, land at the small airfield. After the air defenses are disabled, wait for the host to spawn the tank and armored vehicles.",
+          "Thank you for your cooperation. For modded heists, if the lobby is not full and you have kept the host waiting too long, you may rejoin when the next heist begins. Please stay calm. An administrator will notify you as soon as the current heist ends. If too many players want to join and the lobby is full, some players will take turns in rotation.",
+          "Our server is completely free and is a non-profit community. We do not charge any fees for heist missions. If you would like to support us, you can donate to our server."
+        ],
+        fundraiser:"All heist assistance is free. Donations are entirely optional and help support the server."
+      },
+      zh: {
+        title:"抢劫任务要求",
+        items:[
+          "在佩里科岛抢劫任务中，请勿收集任何次要战利品，包括黄金、可卡因、大麻、画作和现金。",
+          "在赌场抢劫任务中，请勿破解指纹。",
+          "请勿在任务进行到一半时退出。",
+          "请勿让房主等待太久。",
+          "如果使用飞机跳伞进入，请降落在小型机场。关闭防空系统后，请等待房主生成坦克和装甲车。",
+          "感谢您的合作。对于修改后的抢劫任务，如果房间未满，而您让房主等待太久，可以在下一个抢劫任务开始时重新加入。请保持冷静。当前抢劫任务结束后，管理员会立即通知您加入。如果想加入的玩家过多、房间已满，我们会安排部分玩家轮换。",
+          "我们的服务器完全免费，是一个公益组织，不会收取抢劫任务中的任何费用。如果您想帮助我们，可以给服务器打赏。"
+        ],
+        fundraiser:"所有抢劫协助均免费。打赏完全自愿，将用于支持服务器运营。"
+      },
+      ru: {
+        title:"Требования к ограблениям",
+        items:[
+          "Во время ограбления Кайо-Перико не собирайте дополнительную добычу: золото, кокаин, марихуану, картины или наличные.",
+          "Во время ограбления казино не взламывайте сканер отпечатков пальцев.",
+          "Не выходите из задания на середине прохождения.",
+          "Не заставляйте организатора долго ждать.",
+          "Если вы десантируетесь с самолёта, приземлитесь на небольшом аэродроме. После отключения ПВО дождитесь, пока организатор создаст танк и бронетехнику.",
+          "Спасибо за сотрудничество. В модифицированных ограблениях, если лобби не заполнено, а вы заставили организатора долго ждать, вы можете присоединиться снова в начале следующего ограбления. Сохраняйте спокойствие. Администратор сообщит вам сразу после завершения текущего задания. Если желающих слишком много и лобби заполнено, игроки будут присоединяться по очереди.",
+          "Наш сервер полностью бесплатный и является некоммерческим сообществом. Мы не взимаем плату за ограбления. Если хотите помочь нам, можете поддержать сервер добровольным пожертвованием."
+        ],
+        fundraiser:"Помощь в ограблениях бесплатна. Пожертвования необязательны и помогают поддерживать работу сервера."
+      },
+      es: {
+        title:"Requisitos de las misiones de golpes",
+        items:[
+          "Durante el golpe de Cayo Perico, no recojas botín secundario, como oro, cocaína, marihuana, cuadros o dinero en efectivo.",
+          "Durante el golpe al casino, no hackees el escáner de huellas dactilares.",
+          "No abandones una misión a mitad de camino.",
+          "No hagas esperar demasiado al anfitrión.",
+          "Si entras en paracaídas desde un avión, aterriza en el aeródromo pequeño. Después de desactivar las defensas antiaéreas, espera a que el anfitrión genere el tanque y los vehículos blindados.",
+          "Gracias por tu colaboración. En los golpes modificados, si la sala no está llena y has hecho esperar demasiado al anfitrión, puedes volver a unirte cuando comience el siguiente golpe. Mantén la calma. Un administrador te avisará en cuanto termine el golpe actual. Si hay demasiados jugadores y la sala está llena, algunos jugadores se irán turnando.",
+          "Nuestro servidor es totalmente gratuito y es una organización sin ánimo de lucro. No cobramos ninguna tarifa por los golpes. Si quieres ayudarnos, puedes hacer una donación voluntaria al servidor."
+        ],
+        fundraiser:"Toda la ayuda para los golpes es gratuita. Las donaciones son opcionales y ayudan a mantener el servidor."
+      },
+      hi: {
+        title:"हीस्ट मिशन की आवश्यकताएँ",
+        items:[
+          "कायो पेरिको हीस्ट के दौरान सोना, कोकीन, गांजा, पेंटिंग या नकद सहित कोई भी अतिरिक्त लूट न लें।",
+          "कैसीनो हीस्ट के दौरान फिंगरप्रिंट स्कैनर हैक न करें।",
+          "मिशन के बीच में बाहर न निकलें।",
+          "होस्ट को बहुत देर तक इंतज़ार न करवाएँ।",
+          "यदि विमान से पैराशूट द्वारा उतरते हैं, तो छोटे एयरफ़ील्ड पर उतरें। हवाई सुरक्षा बंद होने के बाद होस्ट द्वारा टैंक और बख़्तरबंद वाहन तैयार किए जाने की प्रतीक्षा करें।",
+          "आपके सहयोग के लिए धन्यवाद। मॉडिफ़ाइड हीस्ट में, यदि लॉबी भरी नहीं है और आपने होस्ट को बहुत देर इंतज़ार करवाया है, तो अगले हीस्ट के शुरू होने पर दोबारा जुड़ सकते हैं। शांत रहें। मौजूदा हीस्ट समाप्त होते ही एडमिन आपको सूचित करेगा। यदि बहुत से खिलाड़ी जुड़ना चाहते हैं और लॉबी भर गई है, तो कुछ खिलाड़ियों को बारी-बारी से शामिल किया जाएगा।",
+          "हमारा सर्वर पूरी तरह मुफ़्त है और एक गैर-लाभकारी समुदाय है। हीस्ट मिशन के लिए कोई शुल्क नहीं लिया जाता। यदि आप हमारी मदद करना चाहते हैं, तो सर्वर को स्वैच्छिक दान दे सकते हैं।"
+        ],
+        fundraiser:"हीस्ट में सभी सहायता मुफ़्त है। दान पूरी तरह वैकल्पिक है और सर्वर को बनाए रखने में मदद करता है।"
+      },
+      el: {
+        title:"Απαιτήσεις αποστολών ληστειών",
+        items:[
+          "Κατά τη ληστεία Cayo Perico, μην παίρνετε δευτερεύοντα λάφυρα, όπως χρυσό, κοκαΐνη, κάνναβη, πίνακες ή μετρητά.",
+          "Κατά τη ληστεία του καζίνο, μην παραβιάζετε τον σαρωτή δακτυλικών αποτυπωμάτων.",
+          "Μην αποχωρείτε στη μέση μιας αποστολής.",
+          "Μην αφήνετε τον οικοδεσπότη να περιμένει πολλή ώρα.",
+          "Αν εισέλθετε με αλεξίπτωτο από αεροσκάφος, προσγειωθείτε στο μικρό αεροδρόμιο. Αφού απενεργοποιηθεί η αεράμυνα, περιμένετε να εμφανίσει ο οικοδεσπότης το άρμα και τα τεθωρακισμένα οχήματα.",
+          "Ευχαριστούμε για τη συνεργασία. Στις τροποποιημένες ληστείες, αν το δωμάτιο δεν είναι γεμάτο και καθυστερήσατε τον οικοδεσπότη, μπορείτε να επιστρέψετε όταν αρχίσει η επόμενη ληστεία. Παραμείνετε ψύχραιμοι. Ένας διαχειριστής θα σας ειδοποιήσει μόλις ολοκληρωθεί η τρέχουσα ληστεία. Αν υπάρχουν πολλοί ενδιαφερόμενοι και το δωμάτιο είναι γεμάτο, οι παίκτες θα εναλλάσσονται.",
+          "Ο διακομιστής μας είναι εντελώς δωρεάν και μη κερδοσκοπικός. Δεν χρεώνουμε καμία αμοιβή για τις ληστείες. Αν θέλετε να μας βοηθήσετε, μπορείτε να κάνετε προαιρετική δωρεά στον διακομιστή."
+        ],
+        fundraiser:"Όλη η βοήθεια στις ληστείες παρέχεται δωρεάν. Οι δωρεές είναι προαιρετικές και στηρίζουν τη λειτουργία του διακομιστή."
+      },
+      pt: {
+        title:"Requisitos das missões de assalto",
+        items:[
+          "Durante o golpe de Cayo Perico, não recolha nenhum saque secundário, incluindo ouro, cocaína, maconha, pinturas ou dinheiro.",
+          "Durante o golpe do cassino, não hackeie o leitor de impressões digitais.",
+          "Não saia no meio de uma missão.",
+          "Não deixe o anfitrião esperando por muito tempo.",
+          "Se entrar de paraquedas a partir de uma aeronave, pouse no pequeno aeródromo. Depois que as defesas antiaéreas forem desativadas, aguarde o anfitrião gerar o tanque e os veículos blindados.",
+          "Agradecemos pela colaboração. Nos assaltos modificados, se a sala não estiver cheia e você tiver feito o anfitrião esperar demais, poderá entrar novamente quando o próximo assalto começar. Mantenha a calma. Um administrador avisará assim que o assalto atual terminar. Se houver muitos jogadores interessados e a sala estiver cheia, alguns jogadores participarão em rodízio.",
+          "Nosso servidor é totalmente gratuito e é uma organização sem fins lucrativos. Não cobramos nenhuma taxa pelas missões de assalto. Se quiser nos ajudar, você pode fazer uma doação voluntária ao servidor."
+        ],
+        fundraiser:"Toda a assistência nos assaltos é gratuita. Doações são opcionais e ajudam a manter o servidor."
+      }
+    };
+
+    const languageSelect = document.getElementById("language-select");
+    function setLanguage(lang) {
+      const dict = translations[lang] || translations.en;
+      document.documentElement.lang = lang === "zh" ? "zh-CN" : lang;
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key]) el.textContent = dict[key];
+      });
+      languageSelect.value = translations[lang] ? lang : "en";
+      const rules = announcementRules[lang] || announcementRules.en;
+      document.getElementById("rules-title").textContent = rules.title;
+      const rulesList = document.getElementById("heist-rules");
+      rulesList.replaceChildren(...rules.items.map(item => { const li = document.createElement("li"); li.textContent = item; return li; }));
+      document.getElementById("fundraiser-note").textContent = rules.fundraiser;
+      try { localStorage.setItem("emh-language", lang); } catch (e) {}
+    }
+    languageSelect.addEventListener("change", () => setLanguage(languageSelect.value));
+    let initial = "en";
+    try { initial = localStorage.getItem("emh-language") || "en"; } catch (e) {}
+    setLanguage(initial);
+  </script>
+</body>
+</html>
